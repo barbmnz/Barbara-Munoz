@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>Bienvenidos</h1>
+
+    <script>
+
+        let intentosMaximos = 3;
+        for (let intento = 1; intento <= intentosMaximos; intento++) {
+            let nombre = prompt("Bienvenido! Por favor, ingrese su nombre:");
+            let correoElectronico = prompt("Ingrese su correo electrónico:");
+
+            // Verificar si el usuario ingresó un nombre y un correo electrónico válido
+            if (nombre !== "" && validarCorreoElectronico(correoElectronico)) {
+                // Mostrar mensaje de bienvenida si se proporcionó un nombre y correo electrónico válido
+                alert("¡Bienvenido, " + nombre + "! Correo electrónico registrado: " + correoElectronico);
+                break;  // Salir del bucle si la entrada es válida
+            } else {
+                // Mostrar mensaje alternativo si no se proporcionó un nombre o un correo electrónico válido
+                alert("Datos incompletos o correo electrónico no válido. Intentos restantes: " + (intentosMaximos - intento));
+
+                // Si es el último intento, mostrar un mensaje adicional
+                if (intento === intentosMaximos) {
+                    alert("Número máximo de intentos alcanzado. Adiós.");
+                }
+            }
+        }
+
+        // Función para validar el formato de un correo electrónico usando expresiones regulares
+        function validarCorreoElectronico(correo) {
+            // Expresión regular para validar el formato de un correo electrónico
+            let formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return formatoCorreo.test(correo);
+        }
+
+
+        let precioVestido = 20;
+        let precioPantalon = 20;
+        let productoEnOferta;
+        let totalCompra = 0;
+
+        while (true) {
+            let opcion = prompt(
+                "Elige una opción:\n1 - Vestido\n2 - Pantalon\nPresiona X para salir"
+            );
+
+            if (opcion === "X" || opcion === "x") {
+                break;  // Salir del bucle si se presiona X
+            }
+
+            switch (opcion) {
+                case "1":
+                    productoEnOferta = "Vestido";
+                    totalCompra += precioVestido;
+                    break;
+                case "2":
+                    productoEnOferta = "Pantalon";
+                    totalCompra += precioPantalon;
+                    break;
+                default:
+                    alert("Opción no válida. Inténtalo de nuevo.");
+                    continue;  // Volver al inicio del bucle
+            }
+
+            let cantidad = parseInt(prompt("Ingresa la cantidad que deseas comprar de " + productoEnOferta));
+
+            if (isNaN(cantidad) || cantidad <= 0) {
+                alert("Cantidad no válida. Inténtalo de nuevo.");
+                continue;  // Volver al inicio del bucle
+            }
+
+            totalCompra += cantidad * (productoEnOferta === "Vestido" ? precioVestido : precioPantalon);
+
+            alert("Has elegido comprar " + cantidad + " " + productoEnOferta + "(s).");
+        }
+
+        alert("El total de la compra es: $" + totalCompra.toFixed(2));
+    </script>
+
+</body>
+
+</html>
